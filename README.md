@@ -28,4 +28,4 @@ yarn develop
 ```
 ## Live Deployment
 When pushing to the `main` branch, a new package will be built with the tag `latest`.   
-Run `docker compose up -d` on the live server to deploy the new version.
+Run `docker compose pull` and `docker compose up -d` on the live server to deploy the new version.

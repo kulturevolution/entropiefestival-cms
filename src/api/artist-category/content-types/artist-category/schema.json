@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "artist_categories",
+  "info": {
+    "singularName": "artist-category",
+    "pluralName": "artist-categories",
+    "displayName": "Artist Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

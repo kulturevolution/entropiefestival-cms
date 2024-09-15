@@ -847,6 +847,11 @@ export interface ApiArtistArtist extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    artist_categories: Attribute.Relation<
+      'api::artist.artist',
+      'oneToMany',
+      'api::artist-category.artist-category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -866,6 +871,54 @@ export interface ApiArtistArtist extends Schema.CollectionType {
       'api::artist.artist',
       'oneToMany',
       'api::artist.artist'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiArtistCategoryArtistCategory extends Schema.CollectionType {
+  collectionName: 'artist_categories';
+  info: {
+    singularName: 'artist-category';
+    pluralName: 'artist-categories';
+    displayName: 'Artist Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::artist-category.artist-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::artist-category.artist-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::artist-category.artist-category',
+      'oneToMany',
+      'api::artist-category.artist-category'
     >;
     locale: Attribute.String;
   };
@@ -908,14 +961,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    type: Attribute.Enumeration<['festival', 'party']> &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }> &
-      Attribute.DefaultTo<'festival'>;
     event_location: Attribute.Relation<
       'api::event.event',
       'manyToOne',
@@ -926,6 +971,23 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'manyToMany',
       'api::artist.artist'
     >;
+    event_type: Attribute.Relation<
+      'api::event.event',
+      'manyToOne',
+      'api::event-type.event-type'
+    >;
+    image: Attribute.Media<'images'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    info: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1003,6 +1065,150 @@ export interface ApiEventLocationEventLocation extends Schema.CollectionType {
   };
 }
 
+export interface ApiEventTypeEventType extends Schema.CollectionType {
+  collectionName: 'event_types';
+  info: {
+    singularName: 'event-type';
+    pluralName: 'event-types';
+    displayName: 'Event Type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    events: Attribute.Relation<
+      'api::event-type.event-type',
+      'oneToMany',
+      'api::event.event'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event-type.event-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event-type.event-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::event-type.event-type',
+      'oneToMany',
+      'api::event-type.event-type'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiFaqFaq extends Schema.CollectionType {
+  collectionName: 'faqs';
+  info: {
+    singularName: 'faq';
+    pluralName: 'faqs';
+    displayName: 'FAQ';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    events: Attribute.Relation<'api::faq.faq', 'oneToMany', 'api::event.event'>;
+    info: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::faq.faq',
+      'oneToMany',
+      'api::faq.faq'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiHomepageSettingsHomepageSettings extends Schema.SingleType {
+  collectionName: 'homepage_settings_s';
+  info: {
+    singularName: 'homepage-settings';
+    pluralName: 'homepage-settings-s';
+    displayName: 'Homepage Settings';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    upcoming_event: Attribute.Relation<
+      'api::homepage-settings.homepage-settings',
+      'oneToOne',
+      'api::event.event'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::homepage-settings.homepage-settings',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::homepage-settings.homepage-settings',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::homepage-settings.homepage-settings',
+      'oneToMany',
+      'api::homepage-settings.homepage-settings'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1022,8 +1228,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
       'api::artist.artist': ApiArtistArtist;
+      'api::artist-category.artist-category': ApiArtistCategoryArtistCategory;
       'api::event.event': ApiEventEvent;
       'api::event-location.event-location': ApiEventLocationEventLocation;
+      'api::event-type.event-type': ApiEventTypeEventType;
+      'api::faq.faq': ApiFaqFaq;
+      'api::homepage-settings.homepage-settings': ApiHomepageSettingsHomepageSettings;
     }
   }
 }

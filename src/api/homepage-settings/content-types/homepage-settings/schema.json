@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepage_settings_s",
+  "info": {
+    "singularName": "homepage-settings",
+    "pluralName": "homepage-settings-s",
+    "displayName": "Homepage Settings"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "upcoming_event": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    }
+  }
+}

@@ -43,20 +43,6 @@
       },
       "type": "date"
     },
-    "type": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "festival",
-        "party"
-      ],
-      "required": true,
-      "default": "festival"
-    },
     "event_location": {
       "type": "relation",
       "relation": "manyToOne",
@@ -68,6 +54,32 @@
       "relation": "manyToMany",
       "target": "api::artist.artist",
       "mappedBy": "events"
+    },
+    "event_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-type.event-type",
+      "inversedBy": "events"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "info": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "blocks"
     }
   }
 }

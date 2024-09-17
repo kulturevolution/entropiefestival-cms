@@ -4,7 +4,8 @@
   "info": {
     "singularName": "event-location",
     "pluralName": "event-locations",
-    "displayName": "Event Location"
+    "displayName": "Event Location",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,7 +24,7 @@
       },
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "events": {
       "type": "relation",

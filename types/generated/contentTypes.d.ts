@@ -1036,6 +1036,7 @@ export interface ApiEventLocationEventLocation extends Schema.CollectionType {
     singularName: 'event-location';
     pluralName: 'event-locations';
     displayName: 'Event Location';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1048,7 +1049,6 @@ export interface ApiEventLocationEventLocation extends Schema.CollectionType {
   attributes: {
     name: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

@@ -1089,6 +1089,7 @@ export interface ApiEventTypeEventType extends Schema.CollectionType {
     singularName: 'event-type';
     pluralName: 'event-types';
     displayName: 'Event Type';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1101,7 +1102,6 @@ export interface ApiEventTypeEventType extends Schema.CollectionType {
   attributes: {
     title: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

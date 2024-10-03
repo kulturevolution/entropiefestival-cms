@@ -1007,6 +1007,12 @@ export interface ApiEventEvent extends Schema.CollectionType {
         };
       }> &
       Attribute.DefaultTo<true>;
+    ticket_shop_url: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -116,6 +116,14 @@
       },
       "type": "boolean",
       "default": true
+    },
+    "ticket_shop_url": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

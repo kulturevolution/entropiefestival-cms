@@ -1013,6 +1013,18 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    ticket_header_mobile: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ticket_header_desktop: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

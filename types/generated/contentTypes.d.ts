@@ -1334,6 +1334,7 @@ export interface ApiPagePage extends Schema.CollectionType {
     singularName: 'page';
     pluralName: 'pages';
     displayName: 'Page';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1352,7 +1353,7 @@ export interface ApiPagePage extends Schema.CollectionType {
         };
       }>;
     identifier: Attribute.Enumeration<
-      ['contact', 'imprint', 'terms', 'other']
+      ['contact', 'imprint', 'terms', 'info', 'other']
     > &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -1362,6 +1363,18 @@ export interface ApiPagePage extends Schema.CollectionType {
       }> &
       Attribute.DefaultTo<'other'>;
     content: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    page_header_mobile: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    page_header_desktop: Attribute.Text &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

@@ -158,6 +158,22 @@
       },
       "type": "text",
       "required": true
+    },
+    "ticket_text_before": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "blocks"
+    },
+    "ticket_text_after": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "blocks"
     }
   }
 }

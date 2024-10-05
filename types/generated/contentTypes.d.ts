@@ -1039,6 +1039,18 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    ticket_text_before: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ticket_text_after: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

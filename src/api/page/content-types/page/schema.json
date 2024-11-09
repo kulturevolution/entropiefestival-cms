@@ -37,6 +37,7 @@
         "imprint",
         "terms",
         "info",
+        "newsletter",
         "other"
       ],
       "required": true,

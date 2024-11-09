@@ -1377,7 +1377,7 @@ export interface ApiPagePage extends Schema.CollectionType {
         };
       }>;
     identifier: Attribute.Enumeration<
-      ['contact', 'imprint', 'terms', 'info', 'other']
+      ['contact', 'imprint', 'terms', 'info', 'newsletter', 'other']
     > &
       Attribute.Required &
       Attribute.SetPluginOptions<{

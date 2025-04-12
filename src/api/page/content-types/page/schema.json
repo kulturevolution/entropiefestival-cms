@@ -38,6 +38,7 @@
         "terms",
         "info",
         "newsletter",
+        "supporter",
         "other"
       ],
       "required": true,

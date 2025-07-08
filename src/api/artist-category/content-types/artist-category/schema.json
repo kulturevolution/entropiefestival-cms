@@ -4,7 +4,8 @@
   "info": {
     "singularName": "artist-category",
     "pluralName": "artist-categories",
-    "displayName": "Artist Category"
+    "displayName": "Artist Category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,7 +24,7 @@
       },
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     }
   }
 }

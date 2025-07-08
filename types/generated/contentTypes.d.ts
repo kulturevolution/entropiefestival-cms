@@ -882,6 +882,7 @@ export interface ApiArtistCategoryArtistCategory extends Schema.CollectionType {
     singularName: 'artist-category';
     pluralName: 'artist-categories';
     displayName: 'Artist Category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -894,7 +895,6 @@ export interface ApiArtistCategoryArtistCategory extends Schema.CollectionType {
   attributes: {
     title: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1377,7 +1377,15 @@ export interface ApiPagePage extends Schema.CollectionType {
         };
       }>;
     identifier: Attribute.Enumeration<
-      ['contact', 'imprint', 'terms', 'info', 'newsletter', 'supporter', 'other']
+      [
+        'contact',
+        'imprint',
+        'terms',
+        'info',
+        'newsletter',
+        'supporter',
+        'other'
+      ]
     > &
       Attribute.Required &
       Attribute.SetPluginOptions<{

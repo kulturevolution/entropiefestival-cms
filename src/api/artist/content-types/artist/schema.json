@@ -85,6 +85,28 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::artist-category.artist-category"
+    },
+    "time_slot_start": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "datetime"
+    },
+    "time_slot_end": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "datetime"
+    },
+    "floors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::floor.floor",
+      "inversedBy": "artists"
     }
   }
 }

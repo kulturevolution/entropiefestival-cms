@@ -206,6 +206,12 @@
         }
       },
       "type": "text"
+    },
+    "floors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::floor.floor",
+      "mappedBy": "events"
     }
   }
 }

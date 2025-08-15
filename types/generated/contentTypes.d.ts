@@ -590,6 +590,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -741,53 +788,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
-  info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiArtistArtist extends Schema.CollectionType {
   collectionName: 'artists';
   info: {
@@ -851,6 +851,23 @@ export interface ApiArtistArtist extends Schema.CollectionType {
       'api::artist.artist',
       'oneToMany',
       'api::artist-category.artist-category'
+    >;
+    time_slot_start: Attribute.DateTime &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    time_slot_end: Attribute.DateTime &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    floors: Attribute.Relation<
+      'api::artist.artist',
+      'manyToMany',
+      'api::floor.floor'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1075,6 +1092,11 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    floors: Attribute.Relation<
+      'api::event.event',
+      'manyToMany',
+      'api::floor.floor'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1248,6 +1270,47 @@ export interface ApiFaqFaq extends Schema.CollectionType {
       'api::faq.faq'
     >;
     locale: Attribute.String;
+  };
+}
+
+export interface ApiFloorFloor extends Schema.CollectionType {
+  collectionName: 'floors';
+  info: {
+    singularName: 'floor';
+    pluralName: 'floors';
+    displayName: 'Floor';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    events: Attribute.Relation<
+      'api::floor.floor',
+      'manyToMany',
+      'api::event.event'
+    >;
+    artists: Attribute.Relation<
+      'api::floor.floor',
+      'manyToMany',
+      'api::artist.artist'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::floor.floor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::floor.floor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
   };
 }
 
@@ -1454,16 +1517,17 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
       'api::artist.artist': ApiArtistArtist;
       'api::artist-category.artist-category': ApiArtistCategoryArtistCategory;
       'api::event.event': ApiEventEvent;
       'api::event-location.event-location': ApiEventLocationEventLocation;
       'api::event-type.event-type': ApiEventTypeEventType;
       'api::faq.faq': ApiFaqFaq;
+      'api::floor.floor': ApiFloorFloor;
       'api::homepage-settings.homepage-settings': ApiHomepageSettingsHomepageSettings;
       'api::info-banner.info-banner': ApiInfoBannerInfoBanner;
       'api::page.page': ApiPagePage;
